@@ -1,0 +1,40 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+right_format = """$cmd_duration"""
+
+format = """$all"""
+
+# Inserts a blank line between shell prompts
+add_newline = false
+
+[line_break]
+    disabled = true
+
+# Character at the end of the prompt
+[character]
+    success_symbol = "[](bold fg:black bg:green)" # The "success_symbol" segment is being set to "➜" with the color "bold green"
+    error_symbol = "[!](bold fg:black bg:red)"
+    vicmd_symbol = "[](bold fg:black bg:yellow)"
+
+[cmd_duration]
+    format = "[$duration]($style)"
+    show_notifications = true
+
+[sudo]
+    disabled = false
+    symbol = "#"
+    style = "bold fg:black bg:#d65d0e"
+    format = "[$symbol]($style)"
+
+[directory]
+    format = "[$path]($style)[$read_only]($read_only_style)"
+    style = "bold fg:black bg:cyan"
+    read_only_style = " fg:black bg:red"
+    read_only = "🔒"
+
+[container]
+    disabled = true
+
+[package]
+    disabled = true
