@@ -1,0 +1,118 @@
+{ //one monitor setup
+    "layer": "bottom",
+    "position": "top",
+    "margin-left": 6,
+    "margin-right": 6,
+    "margin-top": 3,
+    "height": 25, // Waybar height (to be removed for auto height)
+    // "width": 1280, // Waybar width
+    "spacing": 4, // Gaps between modules (4px)
+    // Choose the order of the modules
+    "modules-left": ["custom/power", "clock", "idle_inhibitor", "hyprland/workspaces"],
+    "modules-center": [],
+    "modules-right": ["custom/media","custom/mediaControl-prev","custom/mediaControl-next", "pulseaudio", "backlight", "network", "hyprland/language", "battery"],
+  
+    "clock": {
+    	"format": "{:%H:%M %a %d.%m}",
+    	"on-click":"/home/andreasbot/.config/waybar/scripts/calendar-launch.sh", 
+        "interval": 60
+    },
+      
+    "backlight": {
+        "format": "  {percent}%",
+    },
+
+    "battery": {
+        "states": {
+            "good": 75,
+            "warning": 30,
+            "critical": 15
+        },
+	    "full-at":95,
+        "format": "{icon}   {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": "  {capacity}%",
+        "format-alt": "{icon}   {time}",
+        // "format-good": "", // An empty format will hide the module
+        "format-full": "",
+        "format-icons": ["", "", "", "", ""]
+    },
+
+    "network": {
+    	"on-click":"nm-connection-editor",
+        "format-wifi": "   {essid}: {bandwidthTotalBytes} ({signalStrength}%)",
+        "format-ethernet":" eth: {bandwidthTotalBytes}",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ⚠",
+    },
+
+    "pulseaudio": {
+    	"format": "{icon} {volume}%",
+    	"format-muted": "   {volume}%",
+    	"format-icons": {
+    	    "headphone": "🎧",
+    	    "default": ["🔈", "🔊"]
+    	},
+    	"scroll-step": 1,
+    	"on-click-right": "pavucontrol",
+    	"on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    	"ignored-sinks": ["Easy Effects Sink"]
+    },
+
+    "hyprland/workspaces":{
+	"active-only":false,
+	"format":"{id}",
+	"on-scroll-up":"hyprctl dispatch workspace r-1",
+	"on-scroll-down":"hyprctl dispatch workspace r+1",
+
+    },
+
+    "hyprland/language":{
+        "format":{},
+        "format-en":"en",
+        "format-ru":"ru",
+        "on-click":"hyprctl switchxkblayout at-translated-set-2-keyboard next",
+    },
+
+    "custom/mediaControl-prev":{
+        "format": "{}",
+        "return-type": "string",
+	"interval":1,
+	"on-click":"playerctl previous",
+    	"exec":"~/.config/waybar/scripts/player_prev_controller.py",
+    },
+
+    "custom/mediaControl-next":{
+        "format": "{}",
+        "return-type": "string",
+	"interval":1,
+	"on-click":"playerctl next",
+    	"exec":"~/.config/waybar/scripts/player_next_controller.py",
+    },
+
+    "custom/media": {
+        "format": "{}",
+        "return-type": "string",
+        "max-length": 40,
+	"interval":1,
+        "escape": true,
+	"on-scroll-up":"playerctld shift",
+	"on-scroll-down":"playerctld unshift",
+	"on-click":"playerctl play-pause",
+    	"exec":"~/.config/waybar/scripts/player.py",
+    },
+
+    "custom/power": {
+        "format": "⏻",
+ 	"on-click":"wleave -k -f",
+    },
+    
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "No idle ",
+            "deactivated": ""
+        }
+    },
+}
+

@@ -1,0 +1,56 @@
+{
+    "layer": "top",
+    "position": "top",
+    "margin-left": 6,
+    "margin-right": 6,
+    "margin-top": 3,
+    "output": "eDP-1",
+    "height": 25, // Waybar height (to be removed for auto height)
+    // "width": 1280, // Waybar width
+    "spacing": 4, // Gaps between modules (4px)
+    // Choose the order of the modules
+    "modules-left": ["group/tray", "idle_inhibitor"],
+    "modules-center": [],
+    "modules-right": ["hyprland/workspaces"],
+  
+   
+    "hyprland/workspaces":{
+	"active-only":false,
+	"format":"{id}",
+	"on-scroll-up":"hyprctl dispatch workspace r-1",
+	"on-scroll-down":"hyprctl dispatch workspace r+1",
+
+    },
+
+    
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "No idle ",
+            "deactivated": ""
+        }
+    },
+
+    "custom/tray-icon":{
+	"format": "Applications",
+	"tooltip": false,
+    },
+    
+    "tray": {
+    	"spacing": 3, 
+    },
+
+    "group/tray": {
+	"orientation": "horizontal",
+	"drawer":{
+	    "transition-duration": 500,
+	    "children-class": "not-power",
+            "transition-left-to-right": false,
+	},
+	"modules": [
+	    "custom/tray-icon",
+	    "tray"
+	]
+    }
+}
+
