@@ -1,8 +1,0 @@
-#!/bin/bash
-
-killall waybar
-
-hyprctl keyword monitor "eDP-1, 1920x1080@60, 0x400, 1.5"
-
-waybar -c $HOME/.config/waybar/config_2 &
-waybar -c $HOME/.config/waybar/config_3 &
